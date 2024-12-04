@@ -28,8 +28,8 @@ spec:
   {{- if .Values.enableNetworkPolicy }}
   enableNetworkPolicy: {{ .Values.enableNetworkPolicy }}
   {{- end }}
-  {{- if .Values.kubernetesVersion }}
-  kubernetesVersion: {{ .Values.kubernetesVersion }}
+  {{- if .Values.cluster.config.kubernetesVersion }}
+  kubernetesVersion: {{ .Values.cluster.config.kubernetesVersion }}
   {{- end }}
   localClusterAuthEndpoint:
     {{- if .Values.rke.localClusterAuthEndpoint.enabled }}
@@ -41,6 +41,12 @@ spec:
     {{- end }}
   # redeploySystemAgentGeneration: integer
   rkeConfig:
+    {{- if eq $.Values.cloudprovider "openstack" }}
+    {{- with $.Values.cluster.config.chartValues }}
+    chartValues:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+    {{- end }}
     # additionalManifest: string
     # chartValues: object
     # etcd: object
