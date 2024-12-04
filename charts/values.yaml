@@ -5,7 +5,7 @@ cluster:
       rke2-calico: {}
     kubernetesVersion: v1.25.16+rke2r1
 cloudprovider: openstack
-cloudCredentialSecretName: starazona
+cloudCredentialSecretName: cattle-global-data:cc-zrcjb
 nodepools:
   - etcd: true
     controlplane: true
