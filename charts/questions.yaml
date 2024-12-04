@@ -36,13 +36,30 @@ questions:
   show_subquestion_if: "multus,calico"
   subquestions:
     - variable: cluster.config.cni.multusConfig
-      default:
+      default: |
+        rke2-whereabouts:
+          enabled: true
       label: "Multus Configuration"
       description: "Multus Configuration"
       type: multiline
       group: "General"
     - variable: cluster.config.cni.calicoConfig
-      default:
+      default: |
+        felixConfiguration:
+          defaultEndpointToHostAction: Accept
+          xdpEnabled: false
+        global:
+          clusterCIDRv4: 192.168.10.0/24
+        installation:
+          calicoNetwork:
+            mtu: 1420
+            ipPools:
+            - cidr: 192.168.10.0/24
+              natOutgoing: true
+              encapsulation: IPIPStrict
+            - cidr: 10.100.63.0/24
+              natOutgoing: true
+              encapsulation: VXLAN
       label: "Calico Configuration"
       description: "Calico Configuration"
       type: multiline
