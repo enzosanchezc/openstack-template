@@ -21,7 +21,8 @@ authUrl: {{ $nodepool.authUrl | quote }}
 availabilityZone: {{ default "nova" $nodepool.availabilityZone }}
 bootFromVolume: {{ default "false" $nodepool.bootFromVolume }}
 {{- if $nodepool.cacert }}
-cacert: {{ $nodepool.cacert }}
+cacert: |
+{{ $nodepool.cacert }}
 {{- end }}
 configDrive: {{ default "false" $nodepool.configDrive }}
 domainId: "{{ default "" $nodepool.domainId }}"
