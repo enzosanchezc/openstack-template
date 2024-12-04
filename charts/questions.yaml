@@ -35,15 +35,15 @@ questions:
   group: "General"
   show_subquestion_if: "multus,calico"
   subquestions:
-    - variable: cluster.config.cni.multusConfig
+    - variable: cluster.config.cni.multus
       default: |
         rke2-whereabouts:
           enabled: true
       label: "Multus Configuration"
-      description: "Multus Configuration"
+      description: "Specify Multus configuration"
       type: multiline
       group: "General"
-    - variable: cluster.config.cni.calicoConfig
+    - variable: cluster.config.cni.calico
       default: |
         felixConfiguration:
           defaultEndpointToHostAction: Accept
@@ -61,7 +61,7 @@ questions:
               natOutgoing: true
               encapsulation: VXLAN
       label: "Calico Configuration"
-      description: "Calico Configuration"
+      description: "Specify Calico Configuration"
       type: multiline
       group: "General"
 - variable: kubernetesVersion

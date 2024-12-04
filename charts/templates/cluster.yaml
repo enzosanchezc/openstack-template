@@ -46,6 +46,21 @@ spec:
     chartValues:
       {{- toYaml . | nindent 6 }}
     {{- end }}
+    chartValues:
+      {{- if eq .Values.cluster.config.cni "calico" }}
+      rke2-calico: {}
+      {{- else if eq .Values.cluster.config.cni "cilium" }}
+      rke2-cilium: {}
+      {{- else if eq .Values.cluster.config.cni "flannel" }}
+      rke2-flannel: {}
+      {{- else if eq .Values.cluster.config.cni "canal" }}
+      rke2-canal: {}
+      {{- else if eq .Values.cluster.config.cni "multus,calico" }}
+      rke2-multus: |
+        {{ .Values.cluster.config.cni.multus | indent 8 }}
+      rke2-calico: |
+        {{ .Values.cluster.config.cni.calico | indent 8 }}
+      {{- end}}
     {{- end }}
     # additionalManifest: string
     # chartValues: object
@@ -69,7 +84,7 @@ spec:
       # cluster-cidr: ""                              # IPv4/IPv6 network CIDRs to use for pod IPs (default: 10.42.0.0/16)
       # cluster-dns: ""                               # IPv4 Cluster IP for coredns service. Should be in your service-cidr range (default: 10.43.0.10)
       # cluster-domain: ""                            # Cluster Domain (default: "cluster.local")
-      cni: calico                                     # CNI Plugin to deploy, one of none, canal, cilium (default: "canal")
+      cni: {{ .Values.cluster.config.cni }}                                     # CNI Plugin to deploy, one of none, canal, cilium (default: "canal")
       # disable: false                                # Do not deploy packaged components and delete any deployed components (valid items: rke2-coredns, rke2-ingress-nginx, rke2-kube-proxy, rke2-metrics-server)
       # etcd-disable-snapshots: false                 # Disable automatic etcd snapshots
       # etcd-expose-metrics: false                    # Expose etcd metrics to client interface. (Default false)
