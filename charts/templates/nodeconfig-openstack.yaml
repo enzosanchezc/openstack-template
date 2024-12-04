@@ -1,0 +1,107 @@
+{{- if eq .Values.cloudprovider "openstack" }}
+{{- range $index, $nodepool := .Values.nodepools }}
+---
+# OpenStack configuration (ref. openstackconfigs.rke-machine-config.cattle.io CRD)
+apiVersion: rke-machine-config.cattle.io/v1
+kind: OpenstackConfig
+metadata:
+  name: {{ $nodepool.name }}
+  namespace: fleet-default
+  # annotations:
+  #   key: string
+{{- if $nodepool.labels }}
+  labels:
+{{ toYaml $nodepool.labels | indent 4 }}
+{{- end }}
+activeTimeout: "{{ default "200" $nodepool.activeTimeout }}"
+{{- if $nodepool.applicationCredentialId }}
+applicationCredentialId: {{ $nodepool.applicationCredentialId }}
+{{- end }}
+{{- if $nodepool.applicationCredentialName }}
+applicationCredentialName: {{ $nodepool.applicationCredentialName }}
+{{- end }}
+{{- if $nodepool.applicationCredentialSecret }}
+applicationCredentialSecret: {{ $nodepool.applicationCredentialSecret }}
+{{- end }}
+authUrl: {{ $nodepool.authUrl | quote }}
+availabilityZone: {{ default "nova" $nodepool.availabilityZone }}
+bootFromVolume: {{ default "false" $nodepool.bootFromVolume }}
+{{- if $nodepool.cacert }}
+cacert: {{ $nodepool.cacert }}
+{{- end }}
+configDrive: {{ default "false" $nodepool.configDrive }}
+{{- if $nodepool.domainId }}
+domainId: {{ $nodepool.domainId }}
+{{- end }}
+{{- if $nodepool.domainName }}
+domainName: {{ $nodepool.domainName }}
+{{- end }}
+endpointType: {{ default "publicURL" $nodepool.endpointType }}
+{{- if $nodepool.flavorId }}
+flavorId: {{ $nodepool.flavorId }}
+{{- end }}
+{{- if $nodepool.flavorName }}
+flavorName: {{ $nodepool.flavorName | quote }}
+{{- end }}
+{{- if $nodepool.floatingipPool }}
+floatingipPool: {{ $nodepool.floatingipPool }}
+{{- end }}
+{{- if $nodepool.imageId }}
+imageId: {{ $nodepool.imageId }}
+{{- end }}
+{{- if $nodepool.imageName }}
+imageName: {{ $nodepool.imageName | quote }}
+{{- end }}
+insecure: {{ default "false" $nodepool.insecure }}
+ipVersion: {{ default "" $nodepool.ipVersion }}
+keypairName: {{ $nodepool.keypairName }}
+{{- if $nodepool.netId }}
+netId: {{ $nodepool.netId }}
+{{- end }}
+{{- if $nodepool.netName }}
+netName: {{ $nodepool.netName }}
+{{- end }}
+novaNetwork: {{ default "false" $nodepool.novaNetwork }}
+{{- if $nodepool.password }}
+password: {{ default "" $nodepool.password }}
+{{- end }}
+privateKeyFile: |
+{{ $nodepool.privateKeyFile | indent 2 }}
+region: {{ $nodepool.region }}
+sshPort: {{ $nodepool.sshPort | quote }}
+sshUser: {{ $nodepool.sshUser }}
+secGroups: {{ $nodepool.secGroups }}
+{{- if $nodepool.tenantDomainId }}
+tenantDomainId: {{ $nodepool.tenantDomainId }}
+{{- end }}
+{{- if $nodepool.tenantDomainName }}
+tenantDomainName: {{ $nodepool.tenantDomainName }}
+{{- end }}
+{{- if $nodepool.tenantId }}
+tenantId: {{ $nodepool.tenantId }}
+{{- end }}
+{{- if $nodepool.tenantName }}
+tenantName: {{ $nodepool.tenantName }}
+{{- end }}
+{{- if $nodepool.userDataFile }}
+userDataFile: {{ $nodepool.userDataFile }}
+{{- end }}
+{{- if $nodepool.userDomainId }}
+userDomainId: {{ $nodepool.userDomainId }}
+{{- end }}
+{{- if $nodepool.userDomainName }}
+userDomainName: {{ $nodepool.userDomainName }}
+{{- end }}
+{{- if $nodepool.userId }}
+userId: {{ $nodepool.userId }}
+{{- end }}
+{{- if $nodepool.username }}
+username: {{ $nodepool.username }}
+{{- end }}
+volumeDevicePath: {{ default "" $nodepool.volumeDevicePath }}
+volumeId: {{ default "" $nodepool.volumeId }}
+volumeName: {{ default "" $nodepool.volumeName }}
+volumeSize: {{ default "" $nodepool.volumeSize }}
+volumeType: {{ default "" $nodepool.volumeType }}
+{{- end }}
+{{- end }}
