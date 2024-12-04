@@ -58,7 +58,8 @@ tenantId: "{{ default "" $nodepool.tenantId }}"
 tenantName: {{ $nodepool.tenantName }}
 {{- end }}
 {{- if $nodepool.userDataFile }}
-userDataFile: {{ $nodepool.userDataFile }}
+userDataFile: |
+{{- $nodepool.userDataFile | nindent 2 }}
 {{- end }}
 userDomainId: "{{ default "" $nodepool.userDomainId }}"
 userDomainName: "{{ default "" $nodepool.userDomainName }}"
