@@ -20,9 +20,7 @@ applicationCredentialSecret: "{{ default "" $nodepool.applicationCredentialSecre
 authUrl: {{ $nodepool.authUrl | quote }}
 availabilityZone: {{ default "nova" $nodepool.availabilityZone }}
 bootFromVolume: {{ default "false" $nodepool.bootFromVolume }}
-{{- if $nodepool.cacert }}
-cacert: {{ $nodepool.cacert }}
-{{- end }}
+cacert: "{{ default "" $nodepool.cacert }}"
 configDrive: {{ default "false" $nodepool.configDrive }}
 domainId: "{{ default "" $nodepool.domainId }}"
 {{- if $nodepool.domainName }}
@@ -38,7 +36,7 @@ imageId: "{{ default "" $nodepool.imageId }}"
 {{- if $nodepool.imageName }}
 imageName: {{ $nodepool.imageName | quote }}
 {{- end }}
-insecure: {{ default "false" $nodepool.insecure }}
+insecure: {{ default "true" $nodepool.insecure }}
 ipVersion: "{{ default "4" $nodepool.ipVersion }}"
 keypairName: {{ $nodepool.keypairName }}
 netId: "{{ default "" $nodepool.netId }}"
