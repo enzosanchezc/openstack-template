@@ -21,6 +21,32 @@ questions:
   options:
   - openstack
   group: "General"
+- variable: cluster.config.cni
+  default: calico
+  description: "Specify Container Network"
+  label: "Container Network"
+  type: enum
+  required: true
+  options:
+  - calico
+  - cilium
+  - flannel
+  - "multus,calico"
+  group: "General"
+  show_subquestion_if: "multus,calico"
+  subquestions:
+    - variable: cluster.config.cni.multusConfig
+      default:
+      label: "Multus Configuration"
+      description: "Multus Configuration"
+      type: multiline
+      group: "multus,calico"
+    - variable: cluster.config.cni.calicoConfig
+      default:
+      label: "Calico Configuration"
+      description: "Calico Configuration"
+      type: multiline
+      group: "multus,calico"
 - variable: kubernetesVersion
   default: v1.25.16+rke2r1
   description: "Specify Kubernetes version"

@@ -1,8 +1,7 @@
 cluster:
   name: vivo-br
   config:
-    chartValues:
-      rke2-calico: {}
+    cni: calico
     kubernetesVersion: v1.25.16+rke2r1
 cloudprovider: openstack
 cloudCredentialSecretName: cattle-global-data:cc-zrcjb
