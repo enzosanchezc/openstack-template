@@ -47,6 +47,37 @@ spec:
       {{- toYaml . | nindent 6 }}
     {{- end }}
     chartValues:
+      rke2-coredns:
+        servers:
+          - zones:
+              - zone: .
+            port: 53
+            plugins:
+              - name: errors
+              - name: health
+                configBlock: |-
+                  lameduck 5s
+              - name: ready
+              - name: hosts
+                parameters: /etc/coredns/whitecruiser.hosts
+                configBlock: |-
+                  172.16.0.50 whitecruiser.demo.whitestack.com
+                  fallthrough
+              - name: kubernetes
+                parameters: cluster.local in-addr.arpa ip6.arpa
+                configBlock: |-
+                  pods insecure
+                  fallthrough in-addr.arpa ip6.arpa
+                  ttl 30
+              - name: prometheus
+                parameters: 0.0.0.0:9153
+              - name: forward
+                parameters: . /etc/resolv.conf
+              - name: cache
+                parameters: 30
+              - name: loop
+              - name: reload
+              - name: loadbalance
       {{- if eq .Values.cluster.config.cni "calico" }}
       rke2-calico: {}
       {{- else if eq .Values.cluster.config.cni "cilium" }}
