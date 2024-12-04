@@ -40,13 +40,13 @@ questions:
       label: "Multus Configuration"
       description: "Multus Configuration"
       type: multiline
-      group: "multus,calico"
+      group: "General"
     - variable: cluster.config.cni.calicoConfig
       default:
       label: "Calico Configuration"
       description: "Calico Configuration"
       type: multiline
-      group: "multus,calico"
+      group: "General"
 - variable: kubernetesVersion
   default: v1.25.16+rke2r1
   description: "Specify Kubernetes version"
