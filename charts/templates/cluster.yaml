@@ -79,7 +79,10 @@ spec:
               - name: reload
               - name: loadbalance
       {{- if eq .Values.cluster.config.cni "calico" }}
-      rke2-calico: {}
+      rke2-calico:
+        installation:
+          calicoNetwork:
+            mtu: 1440
       {{- else if eq .Values.cluster.config.cni "cilium" }}
       rke2-cilium: {}
       {{- else if eq .Values.cluster.config.cni "flannel" }}
