@@ -64,7 +64,7 @@ questions:
       description: "Specify Calico Configuration"
       type: multiline
       group: "General"
-- variable: kubernetesVersion
+- variable: cluster.config.kubernetesVersion
   default: v1.25.16+rke2r1
   description: "Specify Kubernetes version"
   label: "Kubernetes Version"

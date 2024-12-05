@@ -14,7 +14,7 @@ nodepools:
     name: nodepool-1
     authUrl: "https://whitecloud.intra.whitestack.com:5000"
     domainName: Default
-    flavorName: m1.large
+    flavorName: m1.xlarge
     imageName: "Ubuntu-20.04-CRUISER"
     keypairName: CRUISER_DEPO_KP
     netName: intra-net-solutions-cruiser-mgmt
