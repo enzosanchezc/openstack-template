@@ -8,10 +8,75 @@ cloudCredentialSecretName: cattle-global-data:cc-zrcjb
 nodepools:
   - etcd: true
     controlplane: true
+    worker: false
+    labels: {}
+    quantity: 1
+    name: master
+    authUrl: "https://whitecloud.intra.whitestack.com:5000"
+    domainName: Default
+    flavorName: m1.large
+    imageName: "Ubuntu-20.04-CRUISER"
+    keypairName: CRUISER_DEPO_KP
+    netName: intra-net-solutions-cruiser-mgmt
+    privateKeyFile: |
+      -----BEGIN OPENSSH PRIVATE KEY-----
+      b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn
+      NhAAAAAwEAAQAAAYEAqNwD2sxT9Yo6zFrRrpJvaGujaLdfo4G9NIjBajSTqw3ZYoA9XjiS
+      zfdyLNivWXThjQ/zgm/LtYR6otQ+QhGQKQTAD6R4Ay8nZdlnOtzFBZ348kE4Xq+mbKR0E7
+      4QfBim2Bz6nvURSA4Z/42QoozxC6OPHUj2ikCxp7WT0H8juBg5ChbQlGmwwdtjBiPtkSfJ
+      vJQeRxCPDdN6jAjKKrWvqWukMYpPYme0LAHX2d38ChcxSR4ZrgP5njs/IdwViQL6jQWVfi
+      SYskdlWMxtS6bwvcTuLKpMJS9HZGnhDc/IYE8yVaj2IZR9LTZX+0EErd2Vb5b3eL0cxihU
+      QRTPlrmnNW+l40Q9bfHr80Lm3Poz2H1anrEUxTGbcCkPumpT8hZ8A9HQcJ6xQQNWnoGNyH
+      ERvj7rfXdChbZLexvDJvzfbM3bzFqtBDVa+kb3TCdJSgRLBzOeJ9O2CNXuoL3eFJKLHGsd
+      3QEn/STHj8lOgSgrO3o1T21ddVXTXIjARCHYYVHtAAAFkI6MWHmOjFh5AAAAB3NzaC1yc2
+      EAAAGBAKjcA9rMU/WKOsxa0a6Sb2hro2i3X6OBvTSIwWo0k6sN2WKAPV44ks33cizYr1l0
+      4Y0P84Jvy7WEeqLUPkIRkCkEwA+keAMvJ2XZZzrcxQWd+PJBOF6vpmykdBO+EHwYptgc+p
+      71EUgOGf+NkKKM8Qujjx1I9opAsae1k9B/I7gYOQoW0JRpsMHbYwYj7ZEnybyUHkcQjw3T
+      eowIyiq1r6lrpDGKT2JntCwB19nd/AoXMUkeGa4D+Z47PyHcFYkC+o0FlX4kmLJHZVjMbU
+      um8L3E7iyqTCUvR2Rp4Q3PyGBPMlWo9iGUfS02V/tBBK3dlW+W93i9HMYoVEEUz5a5pzVv
+      peNEPW3x6/NC5tz6M9h9Wp6xFMUxm3ApD7pqU/IWfAPR0HCesUEDVp6BjchxEb4+6313Qo
+      W2S3sbwyb832zN28xarQQ1WvpG90wnSUoESwcznifTtgjV7qC93hSSixxrHd0BJ/0kx4/J
+      ToEoKzt6NU9tXXVV01yIwEQh2GFR7QAAAAMBAAEAAAGAEDTdodhOjphvwEFPMqQXUTxTeK
+      9w3G6NTEd72MenDJnNrWiFe0+Ot3nyWV+KpNlU9Ib9Zh14vbkzVAFu4ERzQ5yTGm08n4Gd
+      FGdjQwEBX+KjjAy6bkwJew/lnCd3yZFMIh3V5/+5YuMHl8Fsik1grS9LgxIHp4lCA8inoT
+      Eyqm6YuuEpr7TdJB38SRCVsoLRF+pXZZavRDJx5pLJZIP/khEktySBLf6qCjc7Ekv97rH/
+      Jvdem5cCFC+3hXZsErRYU9hUJEKkQ01eej6ofucXVUZNCyMUzf9KFjYNIXD9BX3yYJsYyH
+      AU0Bux0ypieMqsYkcnYe4gC8cZe3ZrLHrGpUCp4DkNUgt3pgljBjAaeRmbvFBxWEXx3WKp
+      J+qzCkWVKDYSBNwuHtBep97ZS3CWiSb5FlBLHtWwZvrUbQvG7RtMe7xaje4NOgorIgZEKF
+      rog9UdNNFJNR//CesM2GMFrxvdTQmG1tdAXff7nhlnH3GRLuqoAbjMfPF/S99ypV1BAAAA
+      wQDQ23DW+EB9JzrdpE1Uld8UKxIoeduhUsVdUxEpuFH/h3KVe4eVaC209N5Z5/H2SpR4I5
+      DO7WH0xGheEtllasfEqtKbCJcRmPEKIJ4Eq8No8sKe8z5LkG6rXXYUtmQjL6FkTQwuLZpR
+      afDPskH49Pg+c5997VazIW+Y7cdWwBIatWC9p09+iKaZqUNi56LzE0r8zq0BBrlxoFjrd3
+      yzlY5IOSMB/wQD3GwoWGj6WsBiSpd44NZ2RQkUOYE/pYGEZpAAAADBANVC/qFWXBjcogOL
+      nQx6LLfBi5dpIN6mO9Bao9nlpQA4lz/0gCH8/cuxsL9xf9Evxb368kj9BG09af8j6T6K+T
+      5Ihv3W9RXy+AhtlPP8ASJk89N5k5M1uxSCVsILhSIgitxxrTwA4QkkJYNINXaWxDE6CiE2
+      AMTurESANjFoK9PG8XOgmYWXo0fxgg8XOUtVPB8YgBfWf+Jafd0QJ8DMrzhSfLUggNt7lB
+      F4ADwwzzGyohJud70p1a9cH6j7z/sFJQAAAMEAyrMK6eEEwwblNfMg7lzIFBwy5/NvcaxJ
+      n/Ar4qxrOyzVQzp3+I5pUGdaMfPrS6kfq5rQJtEG7pBZGacLgdxW3gdUQgVvnWWw3Vw8hP
+      0xxFY7Fe8Syfwdbz8+CLzI6X6iXjBD+LLbFdO8c6S+i5HHAkDxbM3bJPL1D+SW+ffYwtti
+      NI02pb6OQsKl025lhRyV/7oMKE6w4iOvhsnYX/z2laVaDsXgqmhbvH4Cuk1ZPHaOvdteqb
+      s+pLWcuXrpMNMpAAAAE3VidW50dUBjcnVpc2VyLWRlcG8BAgMEBQYH
+      -----END OPENSSH PRIVATE KEY-----
+    region: RegionOne
+    secGroups: default
+    sshPort: 22
+    sshUser: ubuntu
+    tenantName: team-solutions-downstreamclusters
+    username: starazona
+    availabilityZone: HAL1
+    userDataFile: |
+      #cloud-config
+      password: openstack
+      chpasswd: { expire: False }
+      ssh_pwauth: True
+      runcmd:
+        - echo 172.16.0.50 whitecruiser.demo.whitestack.com >> /etc/hosts
+  - etcd: false
+    controlplane: false
     worker: true
     labels: {}
     quantity: 1
-    name: nodepool-1
+    name: worker
     authUrl: "https://whitecloud.intra.whitestack.com:5000"
     domainName: Default
     flavorName: m1.xlarge
