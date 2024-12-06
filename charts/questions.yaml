@@ -245,3 +245,132 @@ questions:
   description: "Openstack User name"
   show_if: cloudprovider=openstack
   group: "Nodepools"
+- variable: nodepools.1.name
+  default:
+  description: "Specify nodepool name"
+  type: string
+  label: "Nodepool name"
+  required: true
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.quantity
+  default: 1
+  description: "Specify node count"
+  type: int
+  required: true
+  show_if: cloudprovider=openstack
+  label: "Node count"
+  group: "Nodepools"
+- variable: nodepools.1.etcd
+  default: true
+  label: etcd
+  type: boolean
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.worker
+  default: true
+  label: worker
+  type: boolean
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.controlplane
+  label: controlplane
+  default: true
+  type: boolean
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+# openstack
+- variable: nodepools.1.authUrl
+  label: "Openstack IP/hostname"
+  default: ""
+  type: hostname
+  description: "Openstack IP/hostname for Openstack"
+  required: true
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.domainName
+  label: "Openstack Domain Name"
+  default: "Default"
+  type: string
+  description: "Openstack Domain Name for virtual machine"
+  required: true
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.flavorName
+  label: "Openstack Flavor name"
+  default: ""
+  type: string
+  description: "Openstack Flavor name for virtual machine"
+  required: true
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.imageName
+  label: "Image name"
+  default: ""
+  type: string
+  description: "Image name for VM"
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.keypairName
+  label: "Keypair name"
+  default: ""
+  type: string
+  description: "Keypair name for VM"
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.netName
+  label: "Network"
+  default: ""
+  type: string
+  description: "Networks where the virtual machine will be attached"
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.privateKeyFile
+  label: "Private key file"
+  default: ""
+  type: string
+  description: "Content of Private key"
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.sshPort
+  label: "SSH Port"
+  default: "22"
+  type: string
+  description: "You can specify the ssh port"
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.sshUser
+  label: "SSH User"
+  default: ubuntu
+  type: hostname
+  description: "You can specify the ssh user"
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.secGroups
+  label: "Security groups"
+  default: ""
+  type: string
+  description: "Security groups"
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.region
+  label: "Region"
+  default: "RegionOne"
+  type: string
+  description: "Openstack Region"
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.tenantName
+  label: "Tenant name"
+  default: ""
+  type: string
+  description: "Openstack Tenant"
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
+- variable: nodepools.1.username
+  label: "User name"
+  default: ""
+  type: string
+  description: "Openstack User name"
+  show_if: cloudprovider=openstack
+  group: "Nodepools"
