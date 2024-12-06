@@ -116,7 +116,7 @@ questions:
     description: "Custom monitoring chart values"
     type: multiline
     group: "Monitoring"
-- variable: Master.0.name
+- variable: nodepools.0.name
   default:
   description: "Specify nodepool name"
   type: string
@@ -124,7 +124,7 @@ questions:
   required: true
   show_if: cloudprovider=openstack
   group: "Master"
-- variable: Master.0.quantity
+- variable: nodepools.0.quantity
   default: 1
   description: "Specify node count"
   type: int
@@ -132,26 +132,26 @@ questions:
   show_if: cloudprovider=openstack
   label: "Node count"
   group: "Master"
-- variable: Master.0.etcd
+- variable: nodepools.0.etcd
   default: true
   label: etcd
   type: boolean
   show_if: cloudprovider=openstack
   group: "Master"
-- variable: Master.0.worker
+- variable: nodepools.0.worker
   default: true
   label: worker
   type: boolean
   show_if: cloudprovider=openstack
   group: "Master"
-- variable: Master.0.controlplane
+- variable: nodepools.0.controlplane
   label: controlplane
   default: true
   type: boolean
   show_if: cloudprovider=openstack
   group: "Master"
 # openstack
-- variable: Master.0.authUrl
+- variable: nodepools.0.authUrl
   label: "Openstack IP/hostname"
   default: ""
   type: hostname
@@ -159,7 +159,7 @@ questions:
   required: true
   show_if: cloudprovider=openstack
   group: "Master"
-- variable: Master.0.flavorName
+- variable: nodepools.0.flavorName
   label: "Openstack Flavor name"
   default: ""
   type: string
@@ -167,49 +167,49 @@ questions:
   required: true
   show_if: cloudprovider=openstack
   group: "Master"
-- variable: Master.0.imageName
+- variable: nodepools.0.imageName
   label: "Image name"
   default: ""
   type: string
   description: "Image name for VM"
   show_if: cloudprovider=openstack
   group: "Master"
-- variable: Master.0.keypairName
+- variable: nodepools.0.keypairName
   label: "Keypair name"
   default: ""
   type: string
   description: "Keypair name for VM"
   show_if: cloudprovider=openstack
   group: "Master"
-- variable: Master.0.netName
+- variable: nodepools.0.netName
   label: "Network"
   default: ""
   type: string
   description: "Networks where the virtual machine will be attached"
   show_if: cloudprovider=openstack
   group: "Master"
-- variable: Master.0.secGroups
+- variable: nodepools.0.secGroups
   label: "Security groups"
   default: ""
   type: string
   description: "Security groups"
   show_if: cloudprovider=openstack
   group: "Master"
-- variable: Master.0.tenantName
+- variable: nodepools.0.tenantName
   label: "Tenant name"
   default: ""
   type: string
   description: "Openstack Tenant"
   show_if: cloudprovider=openstack
   group: "Master"
-- variable: Master.0.username
+- variable: nodepools.0.username
   label: "User name"
   default: ""
   type: string
   description: "Openstack User name"
   show_if: cloudprovider=openstack
   group: "Master"
-- variable: Worker.0.name
+- variable: nodepools.1.name
   default:
   description: "Specify nodepool name"
   type: string
@@ -217,7 +217,7 @@ questions:
   required: true
   show_if: cloudprovider=openstack
   group: "Worker"
-- variable: Worker.0.quantity
+- variable: nodepools.1.quantity
   default: 1
   description: "Specify node count"
   type: int
@@ -225,26 +225,26 @@ questions:
   show_if: cloudprovider=openstack
   label: "Node count"
   group: "Worker"
-- variable: Worker.0.etcd
+- variable: nodepools.1.etcd
   default: true
   label: etcd
   type: boolean
   show_if: cloudprovider=openstack
   group: "Worker"
-- variable: Worker.0.worker
+- variable: nodepools.1.worker
   default: true
   label: worker
   type: boolean
   show_if: cloudprovider=openstack
   group: "Worker"
-- variable: Worker.0.controlplane
+- variable: nodepools.1.controlplane
   label: controlplane
   default: true
   type: boolean
   show_if: cloudprovider=openstack
   group: "Worker"
 # openstack
-- variable: Worker.0.authUrl
+- variable: nodepools.1.authUrl
   label: "Openstack IP/hostname"
   default: ""
   type: hostname
@@ -252,7 +252,7 @@ questions:
   required: true
   show_if: cloudprovider=openstack
   group: "Worker"
-- variable: Worker.0.flavorName
+- variable: nodepools.1.flavorName
   label: "Openstack Flavor name"
   default: ""
   type: string
@@ -260,42 +260,42 @@ questions:
   required: true
   show_if: cloudprovider=openstack
   group: "Worker"
-- variable: Worker.0.imageName
+- variable: nodepools.1.imageName
   label: "Image name"
   default: ""
   type: string
   description: "Image name for VM"
   show_if: cloudprovider=openstack
   group: "Worker"
-- variable: Worker.0.keypairName
+- variable: nodepools.1.keypairName
   label: "Keypair name"
   default: ""
   type: string
   description: "Keypair name for VM"
   show_if: cloudprovider=openstack
   group: "Worker"
-- variable: Worker.0.netName
+- variable: nodepools.1.netName
   label: "Network"
   default: ""
   type: string
   description: "Networks where the virtual machine will be attached"
   show_if: cloudprovider=openstack
   group: "Worker"
-- variable: Worker.0.secGroups
+- variable: nodepools.1.secGroups
   label: "Security groups"
   default: ""
   type: string
   description: "Security groups"
   show_if: cloudprovider=openstack
   group: "Worker"
-- variable: Worker.0.tenantName
+- variable: nodepools.1.tenantName
   label: "Tenant name"
   default: ""
   type: string
   description: "Openstack Tenant"
   show_if: cloudprovider=openstack
   group: "Worker"
-- variable: Worker.0.username
+- variable: nodepools.1.username
   label: "User name"
   default: ""
   type: string
