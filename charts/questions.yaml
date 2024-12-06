@@ -245,7 +245,6 @@ questions:
   description: "Openstack User name"
   show_if: cloudprovider=openstack
   group: "Nodepools"
-
 - variable: nodepools.1.name
   default:
   description: "Specify nodepool name"
