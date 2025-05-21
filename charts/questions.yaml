@@ -6,14 +6,8 @@ questions:
   required: true
   type: string
   group: "General"
-- variable: cloudCredentialSecretName
-  default:
-  description: "CloudCredentialName for provisioning cluster"
-  label: "CloudCredential Name"
-  type: cloudcredential
-  group: "General"
 - variable: cloudprovider
-  default: custom
+  default: openstack
   description: "Specify Infrastructure provider for underlying nodes"
   label: "Infrastructure Provider"
   type: enum
@@ -76,6 +70,91 @@ questions:
   - v1.26.15+rke2r1
   - v1.25.16+rke2r1
   group: "General"
+- variable: whiteCruiserVIP
+  default: ""
+  description: "Specify WhiteCruiser VIP"
+  label: "WhiteCruiser VIP"
+  type: string
+  required: true
+  group: "General"
+# openstack general configuration
+- variable: openstack.authUrl
+  label: "Openstack authentication URL"
+  default: ""
+  type: hostname
+  description: "Openstack authentication URL"
+  show_if: cloudprovider=openstack
+  group: "Openstack"
+- variable: openstack.flavorName
+  label: "Openstack Flavor name"
+  default: ""
+  type: string
+  description: "Openstack Flavor name for virtual machine"
+  show_if: cloudprovider=openstack
+  group: "Openstack"
+- variable: openstack.imageName
+  label: "Image name"
+  default: ""
+  type: string
+  description: "Image name for VM"
+  show_if: cloudprovider=openstack
+  group: "Openstack"
+- variable: openstack.keypairName
+  label: "Keypair name"
+  default: ""
+  type: string
+  description: "Keypair name for VM"
+  show_if: cloudprovider=openstack
+  group: "Openstack"
+- variable: openstack.netName
+  label: "Network"
+  default: ""
+  type: string
+  description: "Networks where the virtual machine will be attached"
+  show_if: cloudprovider=openstack
+  group: "Openstack"
+- variable: openstack.secGroups
+  label: "Security groups"
+  default: "default"
+  type: string
+  description: "Security groups"
+  show_if: cloudprovider=openstack
+  group: "Openstack"
+- variable: openstack.tenantName
+  label: "Tenant name"
+  default: ""
+  type: string
+  description: "Openstack Tenant"
+  show_if: cloudprovider=openstack
+  group: "Openstack"
+- variable: openstack.username
+  label: "User name"
+  default: ""
+  type: string
+  description: "Openstack User name"
+  show_if: cloudprovider=openstack
+  group: "Openstack"
+- variable: openstack.availabilityZone
+  label: "Availability Zone"
+  default: ""
+  type: string
+  description: "Openstack availability zone"
+  show_if: cloudprovider=openstack
+  group: "Openstack"
+- variable: openstack.privateKeyFile
+  label: "Private key file"
+  default: ""
+  type: string
+  description: "Private key file for Openstack"
+  show_if: cloudprovider=openstack
+  group: "Openstack"
+- variable: openstack.region
+  label: "Region"
+  default: "RegionOne"
+  type: string
+  description: "Openstack region"
+  show_if: cloudprovider=openstack
+  group: "Openstack"
 - variable: rke.localClusterAuthEndpoint.enabled
   default: false
   label: "Local Auth endpoint"
@@ -139,7 +218,7 @@ questions:
   show_if: cloudprovider=openstack
   group: "Master"
 - variable: nodepools.0.worker
-  default: true
+  default: false
   label: worker
   type: boolean
   show_if: cloudprovider=openstack
@@ -151,62 +230,88 @@ questions:
   show_if: cloudprovider=openstack
   group: "Master"
 # openstack
+- variable: nodepools.0.customOpenstackConfig
+  label: "Enable custom Openstack configuration"
+  default: false
+  type: boolean
+  description: "Enable custom Openstack configuration"
+  show_if: cloudprovider=openstack
+  group: "Master"
 - variable: nodepools.0.authUrl
-  label: "Openstack IP/hostname"
+  label: "Openstack authentication URL"
   default: ""
   type: hostname
-  description: "Openstack IP/hostname for Openstack"
-  required: true
-  show_if: cloudprovider=openstack
+  description: "Openstack authentication URL"
+  show_if: nodepools.0.customOpenstackConfig
   group: "Master"
 - variable: nodepools.0.flavorName
   label: "Openstack Flavor name"
   default: ""
   type: string
   description: "Openstack Flavor name for virtual machine"
-  required: true
-  show_if: cloudprovider=openstack
+  show_if: nodepools.0.customOpenstackConfig
   group: "Master"
 - variable: nodepools.0.imageName
   label: "Image name"
   default: ""
   type: string
   description: "Image name for VM"
-  show_if: cloudprovider=openstack
+  show_if: nodepools.0.customOpenstackConfig
   group: "Master"
 - variable: nodepools.0.keypairName
   label: "Keypair name"
   default: ""
   type: string
   description: "Keypair name for VM"
-  show_if: cloudprovider=openstack
+  show_if: nodepools.0.customOpenstackConfig
   group: "Master"
 - variable: nodepools.0.netName
   label: "Network"
   default: ""
   type: string
   description: "Networks where the virtual machine will be attached"
-  show_if: cloudprovider=openstack
+  show_if: nodepools.0.customOpenstackConfig
   group: "Master"
 - variable: nodepools.0.secGroups
   label: "Security groups"
   default: ""
   type: string
   description: "Security groups"
-  show_if: cloudprovider=openstack
+  show_if: nodepools.0.customOpenstackConfig
   group: "Master"
 - variable: nodepools.0.tenantName
   label: "Tenant name"
   default: ""
   type: string
   description: "Openstack Tenant"
-  show_if: cloudprovider=openstack
+  show_if: nodepools.0.customOpenstackConfig
   group: "Master"
 - variable: nodepools.0.username
   label: "User name"
   default: ""
   type: string
   description: "Openstack User name"
+  show_if: nodepools.0.customOpenstackConfig
+  group: "Master"
+- variable: nodepools.0.availabilityZone
+  label: "Availability Zone"
+  default: ""
+  type: string
+  description: "Openstack availability zone"
+  show_if: nodepools.0.customOpenstackConfig
+  group: "Master"
+- variable: nodepools.0.privateKeyFile
+  label: "Private key file"
+  default: ""
+  type: string
+  description: "Private key file for Openstack"
+  show_if: nodepools.0.customOpenstackConfig
+  group: "Master"
+- variable: nodepools.1.customOpenstackConfig
+  label: "Enable custom Openstack configuration"
+  default: false
+  type: boolean
+  description: "Enable custom Openstack configuration"
   show_if: cloudprovider=openstack
   group: "Master"
 - variable: nodepools.1.name
@@ -215,33 +320,33 @@ questions:
   type: string
   label: "Nodepool name"
   required: true
-  show_if: cloudprovider=openstack
+  show_if: nodepools.1.customOpenstackConfig
   group: "Worker"
 - variable: nodepools.1.quantity
   default: 1
   description: "Specify node count"
   type: int
   required: true
-  show_if: cloudprovider=openstack
+  show_if: nodepools.1.customOpenstackConfig
   label: "Node count"
   group: "Worker"
 - variable: nodepools.1.etcd
-  default: true
+  default: false
   label: etcd
   type: boolean
-  show_if: cloudprovider=openstack
+  show_if: nodepools.1.customOpenstackConfig
   group: "Worker"
 - variable: nodepools.1.worker
   default: true
   label: worker
   type: boolean
-  show_if: cloudprovider=openstack
+  show_if: nodepools.1.customOpenstackConfig
   group: "Worker"
 - variable: nodepools.1.controlplane
   label: controlplane
-  default: true
+  default: false
   type: boolean
-  show_if: cloudprovider=openstack
+  show_if: nodepools.1.customOpenstackConfig
   group: "Worker"
 # openstack
 - variable: nodepools.1.authUrl
@@ -249,56 +354,68 @@ questions:
   default: ""
   type: hostname
   description: "Openstack IP/hostname for Openstack"
-  required: true
-  show_if: cloudprovider=openstack
+  show_if: nodepools.1.customOpenstackConfig
   group: "Worker"
 - variable: nodepools.1.flavorName
   label: "Openstack Flavor name"
   default: ""
   type: string
   description: "Openstack Flavor name for virtual machine"
-  required: true
-  show_if: cloudprovider=openstack
+  show_if: nodepools.1.customOpenstackConfig
   group: "Worker"
 - variable: nodepools.1.imageName
   label: "Image name"
   default: ""
   type: string
   description: "Image name for VM"
-  show_if: cloudprovider=openstack
+  show_if: nodepools.1.customOpenstackConfig
   group: "Worker"
 - variable: nodepools.1.keypairName
   label: "Keypair name"
   default: ""
   type: string
   description: "Keypair name for VM"
-  show_if: cloudprovider=openstack
+  show_if: nodepools.1.customOpenstackConfig
   group: "Worker"
 - variable: nodepools.1.netName
   label: "Network"
   default: ""
   type: string
   description: "Networks where the virtual machine will be attached"
-  show_if: cloudprovider=openstack
+  show_if: nodepools.1.customOpenstackConfig
   group: "Worker"
 - variable: nodepools.1.secGroups
   label: "Security groups"
   default: ""
   type: string
   description: "Security groups"
-  show_if: cloudprovider=openstack
+  show_if: nodepools.1.customOpenstackConfig
   group: "Worker"
 - variable: nodepools.1.tenantName
   label: "Tenant name"
   default: ""
   type: string
   description: "Openstack Tenant"
-  show_if: cloudprovider=openstack
+  show_if: nodepools.1.customOpenstackConfig
   group: "Worker"
 - variable: nodepools.1.username
   label: "User name"
   default: ""
   type: string
   description: "Openstack User name"
-  show_if: cloudprovider=openstack
+  show_if: nodepools.1.customOpenstackConfig
+  group: "Worker"
+- variable: nodepools.1.availabilityZone
+  label: "Availability Zone"
+  default: ""
+  type: string
+  description: "Openstack availability zone"
+  show_if: nodepools.1.customOpenstackConfig
+  group: "Worker"
+- variable: nodepools.1.privateKeyFile
+  label: "Private key file"
+  default: ""
+  type: string
+  description: "Private key file for Openstack"
+  show_if: nodepools.1.customOpenstackConfig
   group: "Worker"

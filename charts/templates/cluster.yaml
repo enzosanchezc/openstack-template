@@ -61,7 +61,7 @@ spec:
               - name: hosts
                 parameters: /etc/coredns/whitecruiser.hosts
                 configBlock: |-
-                  172.16.0.50 whitecruiser.demo.whitestack.com
+                  {{ .Values.whiteCruiserVIP }} {{ trimPrefix "https://" .Values.global.cattle.url }}
                   fallthrough
               - name: kubernetes
                 parameters: cluster.local in-addr.arpa ip6.arpa

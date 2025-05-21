@@ -18,54 +18,54 @@ applicationCredentialId: "{{ default "" $nodepool.applicationCredentialId }}"
 applicationCredentialName: "{{ default "" $nodepool.applicationCredentialName }}"
 applicationCredentialSecret: "{{ default "" $nodepool.applicationCredentialSecret }}"
 authUrl: {{ $nodepool.authUrl | quote }}
-availabilityZone: {{ default "nova" $nodepool.availabilityZone }}
+availabilityZone: {{ coalesce $nodepool.availabilityZone $.Values.openstack.availabilityZone "nova" }}
 bootFromVolume: {{ default "false" $nodepool.bootFromVolume }}
 cacert: "{{ default "" $nodepool.cacert }}"
 configDrive: {{ default "false" $nodepool.configDrive }}
 domainId: "{{ default "" $nodepool.domainId }}"
-{{- if $nodepool.domainName }}
-domainName: {{ $nodepool.domainName }}
+{{- if or $nodepool.domainName $.Values.openstack.domainName }}
+domainName: {{ coalesce $nodepool.domainName $.Values.openstack.domainName }}
 {{- end }}
 endpointType: {{ default "publicURL" $nodepool.endpointType }}
 flavorId: "{{ default "" $nodepool.flavorId }}"
-{{- if $nodepool.flavorName }}
-flavorName: {{ $nodepool.flavorName | quote }}
+{{- if or $nodepool.flavorName $.Values.openstack.flavorName }}
+flavorName: {{ coalesce $nodepool.flavorName $.Values.openstack.flavorName | quote }}
 {{- end }}
 floatingipPool: "{{ default "" $nodepool.floatingipPool }}"
 imageId: "{{ default "" $nodepool.imageId }}"
-{{- if $nodepool.imageName }}
-imageName: {{ $nodepool.imageName | quote }}
+{{- if or $nodepool.imageName $.Values.openstack.imageName }}
+imageName: {{ coalesce $nodepool.imageName $.Values.openstack.imageName | quote }}
 {{- end }}
 insecure: {{ default "false" $nodepool.insecure }}
 ipVersion: "{{ default "4" $nodepool.ipVersion }}"
-keypairName: {{ $nodepool.keypairName }}
+keypairName: {{ coalesce $nodepool.keypairName $.Values.openstack.keypairName }}
 netId: "{{ default "" $nodepool.netId }}"
-{{- if $nodepool.netName }}
-netName: {{ $nodepool.netName }}
+{{- if or $nodepool.netName $.Values.openstack.netName }}
+netName: {{ coalesce $nodepool.netName $.Values.openstack.netName }}
 {{- end }}
 novaNetwork: {{ default "false" $nodepool.novaNetwork }}
 password: "{{ default "" $nodepool.password }}"
 privateKeyFile: |
-{{ $nodepool.privateKeyFile | indent 2 }}
-region: {{ $nodepool.region }}
-sshPort: {{ $nodepool.sshPort | quote }}
-sshUser: {{ $nodepool.sshUser }}
-secGroups: {{ $nodepool.secGroups }}
+{{ coalesce $nodepool.privateKeyFile $.Values.openstack.privateKeyFile | indent 2 }}
+region: {{ coalesce $nodepool.region $.Values.openstack.region "RegionOne" }}
+sshPort: {{ coalesce $nodepool.sshPort "22" | quote }}
+sshUser: {{ coalesce $nodepool.sshUser $.Values.openstack.sshUser "ubuntu"}}
+secGroups: {{ coalesce $nodepool.secGroups $.Values.openstack.secGroups "default"}}
 tenantDomainId: "{{ default "" $nodepool.tenantDomainId }}"
 tenantDomainName: "{{ default "" $nodepool.tenantDomainName }}"
 tenantId: "{{ default "" $nodepool.tenantId }}"
-{{- if $nodepool.tenantName }}
-tenantName: {{ $nodepool.tenantName }}
+{{- if or $nodepool.tenantName $.Values.openstack.tenantName }}
+tenantName: {{ coalesce $nodepool.tenantName $.Values.openstack.tenantName }}
 {{- end }}
-{{- if $nodepool.userDataFile }}
+{{- if or $nodepool.userDataFile $.Values.openstack.userDataFile }}
 userDataFile: |
-{{- $nodepool.userDataFile | nindent 2 }}
+{{- coalesce $nodepool.userDataFile $.Values.openstack.userDataFile | nindent 2 }}
 {{- end }}
 userDomainId: "{{ default "" $nodepool.userDomainId }}"
 userDomainName: "{{ default "" $nodepool.userDomainName }}"
 userId: "{{ default "" $nodepool.userId }}"
-{{- if $nodepool.username }}
-username: {{ $nodepool.username }}
+{{- if or $nodepool.username $.Values.openstack.username }}
+username: {{ coalesce $nodepool.username $.Values.openstack.username "admin" }}
 {{- end }}
 volumeDevicePath: "{{ default "" $nodepool.volumeDevicePath }}"
 volumeId: "{{ default "" $nodepool.volumeId }}"
