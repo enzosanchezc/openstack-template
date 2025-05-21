@@ -23,6 +23,22 @@ spec:
   {{- end }}
   # clusterAPIConfig:
   #   clusterName: string
+  clusterAgentDeploymentCustomization:
+    appendTolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+      - key: node-role.kubernetes.io/etcd
+        operator: Exists
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+  fleetAgentDeploymentCustomization:
+    appendTolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+      - key: node-role.kubernetes.io/etcd
+        operator: Exists
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
   # defaultClusterRoleForProjectMembers: string
   # defaultPodSecurityPolicyTemplateName: string
   {{- if .Values.enableNetworkPolicy }}
