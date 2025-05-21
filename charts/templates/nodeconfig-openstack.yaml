@@ -60,6 +60,8 @@ tenantName: {{ coalesce $nodepool.tenantName $.Values.openstack.tenantName }}
 {{- if or $nodepool.userDataFile $.Values.openstack.userDataFile }}
 userDataFile: |
 {{- coalesce $nodepool.userDataFile $.Values.openstack.userDataFile | nindent 2 }}
+  runcmd:
+  - echo "{{ $.Values.whiteCruiserVIP }} {{ trimPrefix "https://" $.Values.global.cattle.url }}" >> /etc/hosts
 {{- end }}
 userDomainId: "{{ default "" $nodepool.userDomainId }}"
 userDomainName: "{{ default "" $nodepool.userDomainName }}"
