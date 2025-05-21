@@ -17,7 +17,7 @@ activeTimeout: "{{ default "200" $nodepool.activeTimeout }}"
 applicationCredentialId: "{{ default "" $nodepool.applicationCredentialId }}"
 applicationCredentialName: "{{ default "" $nodepool.applicationCredentialName }}"
 applicationCredentialSecret: "{{ default "" $nodepool.applicationCredentialSecret }}"
-authUrl: {{ $nodepool.authUrl | quote }}
+authUrl: {{ coalesce $nodepool.authUrl $.Values.openstack.authUrl | quote }}
 availabilityZone: {{ coalesce $nodepool.availabilityZone $.Values.openstack.availabilityZone "nova" }}
 bootFromVolume: {{ default "false" $nodepool.bootFromVolume }}
 cacert: "{{ default "" $nodepool.cacert }}"
