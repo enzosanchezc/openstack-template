@@ -134,6 +134,12 @@ questions:
   description: "Openstack User name"
   show_if: cloudprovider=openstack
   group: "Openstack"
+- variable: cloudCredentialSecretName
+  default:
+  description: "CloudCredentialName for provisioning cluster"
+  label: "CloudCredential Name"
+  type: cloudcredential
+  group: "Openstack"
 - variable: openstack.availabilityZone
   label: "Availability Zone"
   default: ""
@@ -344,10 +350,10 @@ questions:
   show_subquestion_if: true
   subquestions:
   - variable: nodepools.1.authUrl
-    label: "Openstack IP/hostname"
+    label: "Openstack authentication URL"
     default: ""
     type: hostname
-    description: "Openstack IP/hostname for Openstack"
+    description: "Openstack authentication URL"
     group: "Worker"
   - variable: nodepools.1.flavorName
     label: "Openstack Flavor name"
