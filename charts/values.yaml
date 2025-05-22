@@ -1,4 +1,7 @@
+cloudCredentialSecretName: cattle-global-data:cc-whitecloud-api-password
 openstack:
+  secretApplicationCredentials: whitecloud-application-credentials
+  secretPrivateKeyFile: whitecloud-privatekey
   sshUser: ubuntu
   sshPort: 22
   secGroups: default

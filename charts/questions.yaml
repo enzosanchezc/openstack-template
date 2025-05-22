@@ -127,19 +127,6 @@ questions:
   description: "Openstack Tenant"
   show_if: cloudprovider=openstack
   group: "Openstack"
-- variable: openstack.username
-  label: "User name"
-  default: ""
-  type: string
-  description: "Openstack User name"
-  show_if: cloudprovider=openstack
-  group: "Openstack"
-- variable: cloudCredentialSecretName
-  default:
-  description: "CloudCredentialName for provisioning cluster"
-  label: "CloudCredential Name"
-  type: cloudcredential
-  group: "Openstack"
 - variable: openstack.availabilityZone
   label: "Availability Zone"
   default: ""

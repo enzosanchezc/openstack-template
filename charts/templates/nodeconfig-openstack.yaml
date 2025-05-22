@@ -5,8 +5,8 @@
 apiVersion: rke-machine-config.cattle.io/v1
 kind: OpenstackConfig
 metadata:
-  name: {{ $nodepool.name }}
-  namespace: fleet-default
+  name: "{{ $.Values.cluster.name }}-{{ $nodepool.name }}"
+  namespace: {{ $.Release.Namespace }}
   # annotations:
   #   key: string
 {{- if $nodepool.labels }}
@@ -14,9 +14,17 @@ metadata:
 {{ toYaml $nodepool.labels | indent 4 }}
 {{- end }}
 activeTimeout: "{{ default "200" $nodepool.activeTimeout }}"
-applicationCredentialId: "{{ default "" $nodepool.applicationCredentialId }}"
-applicationCredentialName: "{{ default "" $nodepool.applicationCredentialName }}"
-applicationCredentialSecret: "{{ default "" $nodepool.applicationCredentialSecret }}"
+{{- if lookup "v1" "Secret" $.Release.Namespace $.Values.openstack.secretApplicationCredentials }}
+{{- if (lookup "v1" "Secret" $.Release.Namespace $.Values.openstack.secretApplicationCredentials).data.applicationCredentialId }}
+applicationCredentialId: {{ (lookup "v1" "Secret" $.Release.Namespace $.Values.openstack.secretApplicationCredentials).data.applicationCredentialId | b64dec }}
+{{- end }}
+{{- if (lookup "v1" "Secret" $.Release.Namespace $.Values.openstack.secretApplicationCredentials).data.applicationCredentialName }}
+applicationCredentialName: {{ (lookup "v1" "Secret" $.Release.Namespace $.Values.openstack.secretApplicationCredentials).data.applicationCredentialName | b64dec }}
+{{- end }}
+{{- if (lookup "v1" "Secret" $.Release.Namespace $.Values.openstack.secretApplicationCredentials).data.applicationCredentialSecret }}
+applicationCredentialSecret: {{ (lookup "v1" "Secret" $.Release.Namespace $.Values.openstack.secretApplicationCredentials).data.applicationCredentialSecret | b64dec }}
+{{- end }}
+{{- end }}
 authUrl: {{ coalesce $nodepool.authUrl $.Values.openstack.authUrl | quote }}
 availabilityZone: {{ coalesce $nodepool.availabilityZone $.Values.openstack.availabilityZone "nova" }}
 bootFromVolume: {{ default "false" $nodepool.bootFromVolume }}
@@ -45,8 +53,11 @@ netName: {{ coalesce $nodepool.netName $.Values.openstack.netName }}
 {{- end }}
 novaNetwork: {{ default "false" $nodepool.novaNetwork }}
 password: "{{ default "" $nodepool.password }}"
-privateKeyFile: |
-{{ coalesce $nodepool.privateKeyFile $.Values.openstack.privateKeyFile | indent 2 }}
+{{- if $nodepool.privateKeyFile }}
+privateKeyFile: {{ $nodepool.privateKeyFile | nindent 2 }}
+{{- else if lookup "v1" "Secret" $.Release.Namespace $.Values.openstack.secretPrivateKeyFile }}
+privateKeyFile: | {{ (lookup "v1" "Secret" $.Release.Namespace $.Values.openstack.secretPrivateKeyFile).data.privateKeyFile | b64dec | nindent 4 }}
+{{- end }}
 region: {{ coalesce $nodepool.region $.Values.openstack.region "RegionOne" }}
 sshPort: {{ coalesce $nodepool.sshPort "22" | quote }}
 sshUser: {{ coalesce $nodepool.sshUser $.Values.openstack.sshUser "ubuntu"}}
