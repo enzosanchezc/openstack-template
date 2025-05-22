@@ -191,7 +191,7 @@ spec:
           {{- else if eq $.Values.cloudprovider "vsphere" }}
           kind: VmwarevsphereConfig
           {{- end}}
-          name: {{ $nodepool.name }}
+          name: "{{ $.Values.cluster.name }}-{{ $nodepool.name }}"
           # namespace: string
           # resourceVersion: string
           # uid: string
