@@ -134,13 +134,6 @@ questions:
   description: "Openstack availability zone"
   show_if: cloudprovider=openstack
   group: "Openstack"
-- variable: openstack.privateKeyFile
-  label: "Private key file"
-  default: ""
-  type: multiline
-  description: "Private key file for Openstack"
-  show_if: cloudprovider=openstack
-  group: "Openstack"
 - variable: openstack.region
   label: "Region"
   default: "RegionOne"
